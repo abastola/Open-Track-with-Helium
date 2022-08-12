@@ -15,6 +15,9 @@
       integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
       crossorigin=""
     ></script>
+    <script src="/javascripts/leaflet-ant-path.js">
+
+    </script>
   </head>
   <body>
     <h1>Breakneck Ridge Hiker</h1>
@@ -37,9 +40,19 @@
     }).addTo(map);
 
     for (var i = 0; i < locations.length; i++) {
-      marker = new L.marker([locations[i][1], locations[i][2]])
+      marker = new L.circleMarker([locations[i][1], locations[i][2]])
         .bindPopup(locations[i][0])
         .addTo(map);
     }
+
+    latLongs = locations.map(function(x){
+      return [x[1], x[2]]
+    });
+
+    var polyline = L.polyline(latLongs).addTo(map);
+
+    var antPolyline = L.polyline.antPath(latLongs).addTo(map);
+
+
   </script>
 </html>
