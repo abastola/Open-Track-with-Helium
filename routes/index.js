@@ -23,7 +23,4 @@ router.get("/tracker", function (req, res, next) {
   res.render("index", { Response: responseData });
 });
 
-
-
-
 module.exports = router;
