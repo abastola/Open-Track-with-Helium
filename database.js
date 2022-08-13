@@ -30,6 +30,7 @@ build = function () {
 
   query =
     "CREATE TABLE IF NOT EXISTS DeviceURL ( DeviceID INT NOT NULL PRIMARY KEY, URL VARCHAR(2048) NULL)";
+
   client.query(query, function (err, result) {
     if (err) {
       return console.error("error running query: ", query, err);
@@ -148,16 +149,19 @@ addDeviceURL = (deviceData) => {
   );
 };
 
-build();
+// build();
 // addDeviceURL({DeviceID:2, URL:'testur2'});
 // addDeviceData({DeviceID: 1, Latitude: 12.0, Longitude: 7.0, Time: '20220101'});
 // getDeviceURL({ DeviceID: 1 }, (e, r) => console.log("device url", r));
-getDeviceID({URL:'testurl'}, (e, r) => console.log("DeviceID: ", r));
+// getDeviceID({ URL: "testurl" }, (e, r) => console.log("DeviceID: ", r));
 // getDeviceData({DeviceID: 1}, (e, r) => console.log("device data",r));
 // console.log("Device URL:", d.URL);
 
-exports.getDeviceData;
-exports.getDeviceID;
-exports.getDeviceURL;
-exports.addDeviceData;
-exports.addDeviceURL;
+module.exports = {
+  getDeviceData,
+  getDeviceID,
+  getDeviceURL,
+  addDeviceData,
+  addDeviceURL,
+  build,
+};
