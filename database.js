@@ -15,12 +15,11 @@ build = function () {
         return console.error("error running query", err);
       }
       console.log(result.rows[0].theTime);
-      client.end();
     });
   });
 
   var query =
-    "CREATE TABLE IF NOT EXISTS Device (ID SERIAL PRIMARY KEY, DeviceID INT NOT NULL, Latitude FLOAT NULL, Longitude FLOAT NULL, Time TIMESTAMP NULL)";
+    "CREATE TABLE IF NOT EXISTS Locations (ID SERIAL PRIMARY KEY, DeviceID INT NOT NULL, Latitude FLOAT NULL, Longitude FLOAT NULL, Time TIMESTAMP NULL)";
 
   client.query(query, function (err, result) {
     if (err) {
@@ -45,10 +44,10 @@ build = function () {
 getDeviceData = (deviceData, callback) => {
   console.log(
     "Query: ",
-    `SELECT * FROM Device where DeviceID = ${deviceData.DeviceID};`
+    `SELECT * FROM Locations where DeviceID = ${deviceData.DeviceID};`
   );
   client.query(
-    `SELECT * FROM Device where DeviceID = ${deviceData.DeviceID}`,
+    `SELECT * FROM Locations where DeviceID = ${deviceData.DeviceID}`,
     (error, results) => {
       var dataset = [];
       if (error) {
@@ -56,8 +55,9 @@ getDeviceData = (deviceData, callback) => {
         throw error;
       } else if (results.rows.length > 0) {
         for (each of results.rows) {
-          dataset.push(each);
+          dataset.push([each.time, each.deviceid, each.latitude, each.longitude]);
         }
+        console.log("DATASET: ", dataset)
         callback(null, dataset);
       } else {
         console.log("No data found!");
@@ -66,6 +66,28 @@ getDeviceData = (deviceData, callback) => {
     }
   );
 };
+
+/**
+ *
+ * @param {string} userurl 
+ */
+GetDeviceIDByDeviceUrl = async (userurl) => {
+  console.log(
+    "Query: ",
+    `select deviceid from DeviceURL where url = '${userurl}' limit 1;`
+  );
+  const deviceId = await client.query(
+    `select deviceid from DeviceURL where url = '${userurl}' limit 1;`);
+
+  if (deviceId.rowCount > 0) {
+    // console.log("DeviceID: ", deviceId.rows[0].deviceid)
+    return deviceId.rows[0].deviceid;
+  }
+  else {
+    return 0;
+  }
+};
+
 
 /**
  *
@@ -120,7 +142,7 @@ getDeviceID = (deviceData, callback) => {
  */
 addDeviceData = (deviceData) => {
   client.query(
-    `INSERT INTO Device(DeviceID, Latitude, Longitude, Time) VALUES (${deviceData.DeviceID}, ${deviceData.Latitude}, ${deviceData.Longitude}, '${deviceData.Time}')`,
+    `INSERT INTO Locations(DeviceID, Latitude, Longitude, Time) VALUES (${deviceData.DeviceID}, ${deviceData.Latitude}, ${deviceData.Longitude}, '${deviceData.Time}')`,
     (error) => {
       if (error) {
         throw error;
@@ -144,7 +166,7 @@ addDeviceURL = (deviceData) => {
         // console.log(error);
         throw error;
       }
-      console.log("Device URL added:", deviceData.URL);
+      console.log("Locations URL added:", deviceData.URL);
     }
   );
 };
@@ -152,10 +174,10 @@ addDeviceURL = (deviceData) => {
 // build();
 // addDeviceURL({DeviceID:2, URL:'testur2'});
 // addDeviceData({DeviceID: 1, Latitude: 12.0, Longitude: 7.0, Time: '20220101'});
-// getDeviceURL({ DeviceID: 1 }, (e, r) => console.log("device url", r));
+// getDeviceURL({ DeviceID: 1 }, (e, r) => console.log("Locations url", r));
 // getDeviceID({ URL: "testurl" }, (e, r) => console.log("DeviceID: ", r));
-// getDeviceData({DeviceID: 1}, (e, r) => console.log("device data",r));
-// console.log("Device URL:", d.URL);
+// getDeviceData({DeviceID: 1}, (e, r) => console.log("Locations data",r));
+// console.log("Locations URL:", d.URL);
 
 module.exports = {
   getDeviceData,
@@ -164,4 +186,5 @@ module.exports = {
   addDeviceData,
   addDeviceURL,
   build,
+  GetDeviceIDByDeviceUrl
 };

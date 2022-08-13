@@ -19,4 +19,22 @@ router.get("/", function (req, res, next) {
   res.render("index", { Response: responseData });
 });
 
+/* GET home page. */
+router.get("/tracker/:userurl", async function (req, res, next) {
+  var deviceId = await database.GetDeviceIDByDeviceUrl(req.params.userurl);
+  if (deviceId <= 0) {
+    // to do
+    // res.render error page.
+  }
+
+  database.getDeviceData({ DeviceID: deviceId }, (request, response) => {
+    console.log("Device ID: ", response)
+    var responseData = {
+      locations: response,
+    };
+
+    res.render("index", { Response: responseData });
+  });
+});
+
 module.exports = router;
