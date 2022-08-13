@@ -24,6 +24,9 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/addlocation", dataRouter);
 
+// check database connection
+// require('./database').build();
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
