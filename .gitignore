@@ -101,9 +101,8 @@ dist
 .dynamodb/
 
 # TernJS port file
-
-config.js
-=======
-
+<<<<<<< HEAD
 .tern-port
-
+=======
+.tern-port
+>>>>>>> master
