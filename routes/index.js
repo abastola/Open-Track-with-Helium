@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-/* GET home page. */
+/* GET tracker page */
 router.get("/tracker", function (req, res, next) {
   var locations = [
     ["8/11/2022, 8:11:59 PM", 11.8166, 122.0942],
