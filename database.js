@@ -1,4 +1,3 @@
-var config = require("./config.js");
 var pg = require("pg");
 
 var connString =
