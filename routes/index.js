@@ -1,6 +1,11 @@
 var express = require("express");
 var router = express.Router();
 
+/* GET home page. */
+router.get("/", function (req, res, next) {
+  res.render("homepage");
+});
+
 /* GET tracker page */
 router.get("/tracker", function (req, res, next) {
   var locations = [
@@ -19,9 +24,6 @@ router.get("/tracker", function (req, res, next) {
 });
 
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-   res.render("homepage");
-});
+
 
 module.exports = router;
