@@ -93,12 +93,6 @@
       data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
-    <div class="navbar-nav">
-      <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="#">Contribute</a>
-      </div>
-    </div>
   </header>
 
   <div class="container-fluid">
@@ -196,10 +190,15 @@
         </div>
 
         <div class="my-4 w-100" id="map" width="900" height="380"></div>
+        <div class="text-center p-2">
+          <strong>OpenTrack is built by <a href="https://www.iotoffgrid.com/">IoT Off-Grid</a> with support from <a href="https://www.helium.foundation/">Helium Foundation</a> | Contribute <a href="https://explorer.helium.com/accounts/13TbEzZvhVx93z8T77iVoaVadbWzJGvFEG1p1qBnRedj6eK3NBM">Data Credits</a> | Improve OpenTrack on <a href="https://github.com/abastol1/tracker">Github</a></strong>
+        </div>
 
       </main>
     </div>
+    
   </div>
+  
 
   <script type="text/javascript">
     var locations = '<%- JSON.stringify(Response.locations) %>';
@@ -207,7 +206,7 @@
 
     var focusedLocation = [11.206051, 122.447886];
     if (locations.length > 0) {
-      focusedLocation = [locations[0][1], locations[0][2]];
+      focusedLocation = [locations[locations.length-1][1], locations[locations.length-1][2]];
     }
     var map = L.map('map').setView(focusedLocation, 12);
     mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
