@@ -18,4 +18,10 @@ router.get("/", function (req, res, next) {
   res.render("index", { Response: responseData });
 });
 
+
+/* GET home page. */
+router.get("/homepage", function (req, res, next) {
+   res.render("homepage");
+});
+
 module.exports = router;
