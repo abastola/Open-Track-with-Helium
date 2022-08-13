@@ -109,3 +109,5 @@ config.js
 config.js
 *.vsidx
 .vs/
+*.sqlite
+*.lock
