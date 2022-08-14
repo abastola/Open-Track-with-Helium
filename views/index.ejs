@@ -236,7 +236,7 @@
     }
 
     function ShowLastLocation (num) {
-      var n = num === undefined ? locations.length : num;
+      var n = num === undefined ? locations.length : Math.min(num, locations.length);
       var latLongs = [];
       for (var i = 0; i < n; i++) {
         marker = new L.circleMarker([locations[i][2], locations[i][3]])
@@ -245,6 +245,7 @@
 
         latLongs.push([locations[i][2], locations[i][3]]);
       }
+
       var polyline = L.polyline(latLongs).addTo(map);
       var antPolyline = L.polyline.antPath(latLongs).addTo(map);
     }
