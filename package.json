@@ -6,12 +6,18 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@grapecity/spread-excelio": "^15.1.4",
+    "@grapecity/spread-sheets": "^15.1.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "file-save": "^0.2.0",
     "http-errors": "~1.6.3",
+    "jquery": "^3.6.0",
+    "morgan": "~1.9.1",
+    "xlsx": "^0.18.5",
     "install": "^0.13.0",
     "morgan": "~1.9.1",
     "npm": "^8.17.0",
