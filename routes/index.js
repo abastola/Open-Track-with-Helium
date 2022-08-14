@@ -11,6 +11,7 @@ router.get("/", function (req, res, next) {
 /* GET home page. */
 router.get("/tracker/:userurl", async function (req, res, next) {
   var deviceId = await database.GetDeviceIDByDeviceUrl(req.params.userurl);
+  console.log("Device ID: ", deviceId)
   if (deviceId <= 0) {
     // to do
     // res.render error page.
