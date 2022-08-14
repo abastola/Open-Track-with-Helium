@@ -220,7 +220,7 @@
 
     var focusedLocation = [11.206051, 122.447886];
     if (locations.length > 0) {
-      focusedLocation = [locations[locations.length-1][1], locations[locations.length-1][2]];
+      focusedLocation = [locations[locations.length-1][2], locations[locations.length-1][3]];
     }
 
     var map = L.map('map').setView(focusedLocation, 12);
@@ -239,11 +239,11 @@
       var n = num === undefined ? locations.length : num;
       var latLongs = [];
       for (var i = 0; i < n; i++) {
-        marker = new L.circleMarker([locations[i][1], locations[i][2]])
+        marker = new L.circleMarker([locations[i][2], locations[i][3]])
           .bindPopup(locations[i][0])
           .addTo(map);
 
-        latLongs.push([locations[i][1], locations[i][2]]);
+        latLongs.push([locations[i][2], locations[i][3]]);
       }
       var polyline = L.polyline(latLongs).addTo(map);
       var antPolyline = L.polyline.antPath(latLongs).addTo(map);
@@ -259,7 +259,7 @@
       var csv = "";
       csv = "Timestamp, Latitude, Longitude \n";
       locations.forEach((curr, i, arr) => {
-        csv += curr[0] + "," + curr[1] + "," + curr[2] + "\n"; 
+        csv += curr[0] + "," + curr[2] + "," + curr[3] + "\n"; 
       });
       
       console.log(csv);

@@ -5,6 +5,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.post("/", function (req, res, next) {
+  console.log("here")
   try {
     var payload = req.body.payload;
     if (req.body.port !== 2) {
@@ -16,10 +17,10 @@ router.post("/", function (req, res, next) {
         DeviceID: locationInfo.dev_id,
         Latitude: locationInfo.lat,
         Longitude: locationInfo.lng,
-        Time: locationInfo.date_stamp + " " + locationInfo.time_stamp,
+        Time: new Date(Date.now()).toISOString()
       };
       database.addDeviceData(locationToPush);
-      res.json({ response: locationToPush });
+      res.sendStatus(200);
     }
   }
   catch {
