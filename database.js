@@ -44,10 +44,10 @@ build = function () {
 getDeviceData = (deviceData, callback) => {
   console.log(
     "Query: ",
-    `SELECT * FROM Locations where DeviceID = ${deviceData.DeviceID};`
+    `SELECT * FROM Locations where DeviceID = ${deviceData.DeviceID} order by Time desc;`
   );
   client.query(
-    `SELECT * FROM Locations where DeviceID = ${deviceData.DeviceID}`,
+    `SELECT * FROM Locations where DeviceID = ${deviceData.DeviceID} order by Time desc;`,
     (error, results) => {
       var dataset = [];
       if (error) {
