@@ -236,15 +236,16 @@
     }
 
     function ShowLastLocation (num) {
-      var n = num === undefined ? locations.length : num;
+      var n = num === undefined ? locations.length : Math.min(num, locations.length);
       var latLongs = [];
-      for (var i = 0; i < n; i++) {
+      for (var i = locations.length - n; i < locations.length; i++) {
         marker = new L.circleMarker([locations[i][2], locations[i][3]])
           .bindPopup(locations[i][0])
           .addTo(map);
 
         latLongs.push([locations[i][2], locations[i][3]]);
       }
+
       var polyline = L.polyline(latLongs).addTo(map);
       var antPolyline = L.polyline.antPath(latLongs).addTo(map);
     }

@@ -47,7 +47,7 @@ getDeviceData = (deviceData, callback) => {
     `SELECT * FROM Locations where DeviceID = ${deviceData.DeviceID};`
   );
   client.query(
-    `SELECT * FROM Locations where DeviceID = ${deviceData.DeviceID}`,
+    `SELECT * FROM Locations where DeviceID = ${deviceData.DeviceID};`,
     (error, results) => {
       var dataset = [];
       if (error) {
