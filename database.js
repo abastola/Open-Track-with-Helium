@@ -2,39 +2,42 @@ require("dotenv").config();
 var pg = require("pg");
 
 var connString = process.env.POSTGRES_CONNSTRING;
-var client = new pg.Client(connString);
+var pool = new pg.Pool({
+  host: 'ziggy.db.elephantsql.com',
+  user: 'dkbymgrx',
+  password: 'v8EKHYLx_HSX5_LwvPnmcysfuQZU4SV1',
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
+});
 
 build = function () {
-  client.connect(function (err) {
-    if (err) {
-      return console.error("could not connect to postgres", err);
-    }
-
-    client.query('SELECT NOW() AS "theTime"', function (err, result) {
-      if (err) {
-        return console.error("error running query", err);
-      }
-      console.log(result.rows[0].theTime);
-    });
-  });
+  pool
+    .connect()
+    .then(client => {
+      client.query('SELECT NOW() AS "theTime"', (err, result) => {
+        if (err) {
+          return console.error("error running query", err);
+        }
+        console.log(result.rows[0].theTime);
+        client.release();
+      });
+    })
+    .catch(err => {return console.error("could not connect to postgres", err);});  
 
   var query =
     "CREATE TABLE IF NOT EXISTS Locations (ID SERIAL PRIMARY KEY, DeviceID INT NOT NULL, Latitude FLOAT NULL, Longitude FLOAT NULL, Time TIMESTAMP NULL)";
 
-  client.query(query, function (err, result) {
-    if (err) {
-      return console.error("error running query: ", query, err);
-    }
-  });
+  pool
+    .query(query)
+    .catch(err => console.error("error running query: ", query, err));
 
   query =
     "CREATE TABLE IF NOT EXISTS DeviceURL ( DeviceID INT NOT NULL PRIMARY KEY, URL VARCHAR(2048) NULL)";
 
-  client.query(query, function (err, result) {
-    if (err) {
-      return console.error("error running query: ", query, err);
-    }
-  });
+  pool
+    .query(query)
+    .catch(err => console.error("error running query: ", query, err));
 };
 
 /**
