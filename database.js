@@ -9,6 +9,9 @@ const dbPromise = open({
   driver: sqlite3.Database,
 });
 
+/**
+ * Setup the required tables
+ */
 Build = async () => {
   console.log("DB Filename: ", db_name);
   const db = await dbPromise;
@@ -24,8 +27,8 @@ Build = async () => {
 };
 
 /**
- *
- * @param {json} deviceData .DeviceID
+ * Get all fields from Locations table where DeviceID is deviceData.DeviceID
+ * @param {json} deviceData { DeviceID: value }
  */
 GetDeviceData = async (deviceData) => {
   const db = await dbPromise;
@@ -46,24 +49,24 @@ GetDeviceData = async (deviceData) => {
 };
 
 /**
- *
+ * Get the DeviceID for the userurl
  * @param {string} userurl
  */
 GetDeviceIDByDeviceUrl = async (userurl) => {
   const db = await dbPromise;
   console.log(
     "Query: ",
-    `select deviceid from DeviceURL where url = '${userurl}'`
+    `select DeviceID from DeviceURL where url = '${userurl}'`
   );
   const data = await db.get(
-    "select deviceid from DeviceURL where url = ?",
+    "select DeviceID from DeviceURL where url = ?",
     userurl
   );
   return data.DeviceID;
 };
 
 /**
- *
+ * Add device location data to the Locations table.
  * @param {json} deviceData {DeviceID: , Latitude: , Longitude: , Time: ''}
  */
 AddDeviceData = async (deviceData) => {
@@ -87,7 +90,7 @@ AddDeviceData = async (deviceData) => {
 };
 
 /**
- *
+ * Add Device URL to the URL tables
  * @param {json} deviceData {DeviceID: , URL: ''}
  */
 AddDeviceURL = async (deviceData) => {
@@ -100,19 +103,6 @@ AddDeviceURL = async (deviceData) => {
     deviceData.URL,
   ]);
 };
-
-if (typeof module !== "undefined" && !module.parent) {
-  Build();
-  // AddDeviceData({
-  //   DeviceID: 1,
-  //   Latitude: 40.8564,
-  //   Longitude: -73.9622,
-  //   Time: "2022-08-14 22:06:52",
-  // });
-  // AddDeviceURL({ DeviceID: 2, URL: "test" });
-  // GetDeviceIDByDeviceUrl("test");
-  // GetDeviceData({ DeviceID: 1 });
-}
 
 module.exports = {
   Build,
