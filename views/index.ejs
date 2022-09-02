@@ -9,7 +9,7 @@
   <meta name="generator" content="Hugo 0.101.0">
   <title>OpenTrack with Helium</title>
 
-  
+
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
   <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/stylesheets/style.css" />
@@ -17,9 +17,13 @@
     integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
     crossorigin="" />
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
     integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
     crossorigin="anonymous"></script>
@@ -190,7 +194,8 @@
               <button type="button" class="btn btn-sm btn-outline-secondary" onclick="exportToExcel();">Export</button>
             </div>
             <div class="dropdown show">
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Show
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -205,14 +210,17 @@
 
         <div class="my-4 w-100" id="map" width="900" height="380"></div>
         <div class="text-center p-2">
-          <strong>OpenTrack is built by <a href="https://www.iotoffgrid.com/">IoT Off-Grid</a> with support from <a href="https://www.helium.foundation/">Helium Foundation</a> | Contribute <a href="https://explorer.helium.com/accounts/13TbEzZvhVx93z8T77iVoaVadbWzJGvFEG1p1qBnRedj6eK3NBM">Data Credits</a> | Improve OpenTrack on <a href="https://github.com/abastol1/tracker">Github</a></strong>
+          <strong>OpenTrack is built by <a href="https://www.iotoffgrid.com/">IoT Off-Grid</a> with support from <a
+              href="https://www.helium.foundation/">Helium Foundation</a> | Contribute <a
+              href="https://explorer.helium.com/accounts/13TbEzZvhVx93z8T77iVoaVadbWzJGvFEG1p1qBnRedj6eK3NBM">Data
+              Credits</a> | Improve OpenTrack on <a href="https://github.com/abastol1/tracker">Github</a></strong>
         </div>
 
       </main>
     </div>
-    
+
   </div>
-  
+
 
   <script type="text/javascript">
     var locations = '<%- JSON.stringify(Response.locations) %>';
@@ -220,7 +228,7 @@
 
     var focusedLocation = [11.206051, 122.447886];
     if (locations.length > 0) {
-      focusedLocation = [locations[locations.length-1][2], locations[locations.length-1][3]];
+      focusedLocation = [locations[locations.length - 1][2], locations[locations.length - 1][3]];
     }
 
     var map = L.map('map').setView(focusedLocation, 16);
@@ -228,14 +236,14 @@
     RefreshLastLocation();
 
     function RefreshMarkers() {
-      map.eachLayer((layer) => {layer.remove(); });
+      map.eachLayer((layer) => { layer.remove(); });
       L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; ' + mapLink + ' Contributors',
         maxZoom: 18,
       }).addTo(map);
     }
 
-    function ShowLastLocation (num) {
+    function ShowLastLocation(num) {
       var n = num === undefined ? locations.length : Math.min(num, locations.length);
       var latLongs = [];
       for (var i = locations.length - n; i < locations.length; i++) {
@@ -250,19 +258,19 @@
       var antPolyline = L.polyline.antPath(latLongs).addTo(map);
     }
 
-    function RefreshLastLocation(num){
+    function RefreshLastLocation(num) {
       RefreshMarkers();
       ShowLastLocation(num);
     }
 
-    var exportToExcel = () => {  
+    var exportToExcel = () => {
       var element = document.createElement('a');
       var csv = "";
       csv = "Timestamp, Latitude, Longitude \n";
       locations.forEach((curr, i, arr) => {
-        csv += curr[0] + "," + curr[2] + "," + curr[3] + "\n"; 
+        csv += curr[0] + "," + curr[2] + "," + curr[3] + "\n";
       });
-      
+
       console.log(csv);
       element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(csv));
       element.setAttribute('download', "openTrackerData.csv");
@@ -270,7 +278,7 @@
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
-    } 
+    }
 
 
   </script>

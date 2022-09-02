@@ -3,13 +3,20 @@ var decoder = require("../Helper/Decoder");
 var database = require("../database");
 var router = express.Router();
 
-/* GET home page. */
+/**
+ * URI: /addlocation/adddata
+ * Receives payload and port in the body
+ * Adds the decoded info into the database
+ */
 router.post("/", function (req, res, next) {
   try {
     var payload = req.body.payload;
     if (req.body.port !== 2) {
       res.json({ response: {} });
     } else {
+
+      // Decoding Base64 Strings for 'payload'
+      // Decoded string is then passed through Decoder which returns a json object with the device and it's location
       var locationInfo = decoder.Decoder(Buffer.from(payload, "base64"), 2);
 
       if (locationInfo && "dev_id" in locationInfo && "lat" in locationInfo && "lng" in locationInfo) {

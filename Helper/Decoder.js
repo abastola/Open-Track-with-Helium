@@ -93,5 +93,3 @@ function Decoder(bytes, port) {
 }
 
 module.exports = { Decoder };
-
-// data = Decoder(Buffer.from(payload, 'base64'), 2)
