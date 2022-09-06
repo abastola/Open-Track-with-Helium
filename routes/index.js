@@ -15,7 +15,7 @@ router.get("/tracker/:userurl", async function (req, res, next) {
   try {
     if (!req.params || !req.params.userurl) {
       return res.send(
-        "URL is not passed. Please check your URL and try again."
+        "Device ID is not passed. Please check your URL and try again."
       );
     }
 
