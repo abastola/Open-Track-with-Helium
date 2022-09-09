@@ -24,7 +24,7 @@ router.get("/tracker/:deviceId", async function (req, res, next) {
       locations: await database.GetDeviceData({ DeviceID: deviceId }),
     };
 
-    res.render("index", { Response: responseData });
+    res.render("tracker", { Response: responseData });
   } catch {
     res.sendStatus(400);
   }
