@@ -26,10 +26,11 @@ Thanks to [GeeksForGeeks ](https://www.geeksforgeeks.org/how-to-deploy-node-js-a
 16. Copy the URL from Heroku and paste it under Endpoint URL. HTTP Header and Value are not required and those can be left blank. Lastly, provide a name for the integration. Names do not have to be unique. Click Add Integration.
 17. Goto Flows > Devices
 18. Drag and Drop the Device to the Dashboard
-19. Goto Integrations Drag and Drop the Integration we just added to the Dashboard
-20. Connect Device to Integration in the Dashboard
-21. Your device should start sending location data to your Heroku app
-22. Your device's location can be accessred from https://APP-NAME.herokuapp.com/tracker/DEVICEID
+19. Goto Flows > Integrations 
+20. Drag and Drop the Integration we just added to the Dashboard
+21. Connect Device to Integration in the Dashboard
+22. Your device should start sending location data to your Heroku app
+23. Your device's location can be accessred from https://APP-NAME.herokuapp.com/tracker/DEVICEID
 
 
 
