@@ -6,6 +6,9 @@ IoT solution with an open source and free to use tracking platform for high diff
 - [Helium Foundation](http://www.helium.foundation/ "Helium Foundation")
 - [New York New Jersey Trail Conference](https://www.nynjtc.org/ "New York New Jersey Trail Conference")
 
+# Import information
+This dashboard currently works with WisNode TrackIt RAK2171 only. The project will be constantly updated to include more devices.
+
 # Deploy your own Dashboard using Heroku and Github
 Thanks to [GeeksForGeeks ](https://www.geeksforgeeks.org/how-to-deploy-node-js-app-on-heroku-from-github/ "GeeksForGeeks ")for steps to deploy Node.js app using Heroku
 1. Create Free Account on Heroku
