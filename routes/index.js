@@ -11,19 +11,14 @@ router.get("/", function (req, res, next) {
  * API 'GET' Call in /tracker/(deviceid)
  * deviceid is unique for each device
  */
-router.get("/tracker/:deviceid", async function (req, res, next) {
+router.get("/tracker/:deviceId", async function (req, res, next) {
   try {
-    if (!req.params || !req.params.deviceid) {
+    if (!req.params || !req.params.deviceId) {
       return res.send(
         "Device ID is not passed. Please check your URL and try again."
       );
     }
-
-    // If deviceID is 0 or less, then url is incorrect.
-    if (deviceId <= 0) {
-      return res.send("Invalid DeviceId. Please check your URL and try again.");
-    }
-
+    var deviceId = req.params.deviceId;
     // Get list of locations using the deviceid.
     var responseData = {
       locations: await database.GetDeviceData({ DeviceID: deviceId }),
