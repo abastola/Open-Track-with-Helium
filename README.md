@@ -11,6 +11,9 @@ This dashboard currently works with WisNode TrackIt RAK2171 only. The project wi
 
 # Deploy your own Dashboard using Heroku and Github
 Thanks to [GeeksForGeeks ](https://www.geeksforgeeks.org/how-to-deploy-node-js-app-on-heroku-from-github/ "GeeksForGeeks ")for steps to deploy Node.js app using Heroku
+
+Please note that Heroku is ending all it's free services starting November 28th, 2022. We will soon update this page to include AWS Free Tier Hosting.
+
 1. Create Free Account on Heroku
 2. Clone this repository and push it to your Github
 3. Goto https://dashboard.heroku.com/apps and Click on New > Create New App
