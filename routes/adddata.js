@@ -26,7 +26,7 @@ router.post("/", function (req, res, next) {
           Longitude: locationInfo.lng,
           Time: new Date(Date.now()).toISOString()
         };
-        database.addDeviceData(locationToPush);
+        database.AddDeviceData(locationToPush);
         res.sendStatus(200);
       }
       else {
