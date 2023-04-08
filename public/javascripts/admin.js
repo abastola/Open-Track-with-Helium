@@ -1,3 +1,24 @@
+const url = window.location.href; // get the current URL
+const qrCode = new QRCodeStyling({
+  width: 150,
+  height: 150,
+  data: url,
+  image: "/images/logo_qr.jpg",
+  qrOptions: {
+    errorCorrectionLevel: 'H', // set error correction level to high
+  },
+  renderer: 'svg',
+  imageOptions: {
+    crossOrigin: 'anonymous', // set cross-origin attribute to avoid CORS errors
+  },
+  dotsOptions: {
+    color: '#000000', // set the color of the QR code dots
+    type: 'rounded'
+  },
+});
+qrCode.append(document.getElementById('qrcode')); // append the QR code to an element with id "qrcode" on the HTML page
+
+
 function copyURLToClipboard() {
   // Get the current page URL
   const url = window.location.href;
@@ -25,4 +46,14 @@ function copyURLToClipboard() {
       theme: 'sunset' // theme of the toast message
     }).show();
   });
+}
+
+
+function generateQRCode() {
+
+}
+
+function DownloadQRCode() {
+  qrCode.download('qrcode.png'); // add download option to download QR code as png image file
+
 }
