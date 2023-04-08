@@ -120,6 +120,10 @@ body {
   .sidebar, .topNavBar {
     background-color: rgba(0, 0, 0, 0.9) !important;
   }
+
+  .headerText{
+    font-size: 22px;
+  }
 }
 
 /* Mobile View CSS */
