@@ -27,7 +27,7 @@ router.get("/tracker/:deviceId", async function (req, res, next) {
     };
 
     if (responseData?.locations?.length) {
-      return res.render("tracker", { Response: responseData });
+      return res.render("tracker", { Response: responseData, DeviceEUI: deviceId });
     } else {
       throw new createError.NotFound("Device not found");
     }
