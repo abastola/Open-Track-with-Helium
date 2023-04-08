@@ -15,9 +15,7 @@ router.get("/", function (req, res, next) {
 router.get("/tracker/:deviceId", async function (req, res, next) {
   try {
     if (!req?.params?.deviceId) {
-      return res.send(
-        "INVALID Device ID. Please check your URL and try again."
-      );
+      throw new createError.BadRequest("Please check your URL.");
     }
 
     const deviceId = req.params.deviceId;
@@ -27,7 +25,10 @@ router.get("/tracker/:deviceId", async function (req, res, next) {
     };
 
     if (responseData?.locations?.length) {
-      return res.render("tracker", { Response: responseData, DeviceEUI: deviceId });
+      return res.render("tracker", {
+        Response: responseData,
+        DeviceEUI: deviceId,
+      });
     } else {
       throw new createError.NotFound("Device not found");
     }
