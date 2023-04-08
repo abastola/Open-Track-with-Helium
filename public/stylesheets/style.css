@@ -1,6 +1,17 @@
 body {
-  background-color: #fbfbfb;
+  background-image: url("/images/bg.PNG");
 }
+
+.headerText {
+  font-size: 25px;
+  letter-spacing: 2px;
+  color: white;
+}
+
+.navBarExpandBtn{
+  color: white;
+}
+
 @media (min-width: 991.98px) {
   main {
     padding-left: 300px;
@@ -18,16 +29,11 @@ body {
   z-index: 600;
 }
 
-@media (max-width: 991.98px) {
-  .sidebar {
-    width: -webkit-fill-available;
-  }
-
-  .mapComponent {
-    margin-left: 0px !important;
-  }
-
+.sidebar, .topNavBar {
+  background-color:rgba(0, 0, 0, 0.4) !important;
 }
+
+
 .sidebar .active {
   border-radius: 5px;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
@@ -89,3 +95,31 @@ body {
   color: white;
   cursor: pointer;
 }
+
+
+
+/* Mobile View CSS */
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    width: -webkit-fill-available;
+  }
+
+  .mapComponent {
+    margin-left: 0px !important;
+  }
+
+  .topDivContent {
+    justify-content: normal !important;
+  }
+
+  .QRCodeDiv{
+    left: 90px;
+  }
+
+  .sidebar, .topNavBar {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+  }
+}
+
+/* Mobile View CSS */
