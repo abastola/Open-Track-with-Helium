@@ -32,6 +32,8 @@
     integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
     crossorigin=""></script>
 
+  <script src="/javascripts/qrcode.min.js"></script>
+
   <script src="/javascripts/leaflet-ant-path.js"> </script>
 
   <link rel="stylesheet" href="/stylesheets/admin.css" />
@@ -114,6 +116,11 @@
           </a>
           <a href="https://rakwireless.kckb.st/50a28dfa" class="list-group-item list-group-item-action py-2 ripple"><i
               class="fas fa-chart-bar fa-fw me-3"></i><span>Buy WisNode TrackIt RAK2171</span></a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+            <div id="qrcode">
+            </div>
+          </a>
+
         </div>
       </div>
     </nav>
@@ -196,6 +203,14 @@
   <script type="text/javascript" src="/javascripts/admin.js"></script>
 
   <script type="text/javascript">
+    new QRCode(document.getElementById("qrcode"), {
+      text: window.location.href,
+      width: 128,
+      height: 128,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
     var locations = '<%- JSON.stringify(Response.locations) %>';
     locations = JSON.parse(locations);
 
@@ -206,7 +221,7 @@
 
     var map = L.map('map').setView(focusedLocation, 14);
     mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-    RefreshLastLocation();
+    RefreshLastLocation(1);
 
     function RefreshMarkers() {
       map.eachLayer((layer) => { layer.remove(); });
@@ -244,20 +259,14 @@
         csv += curr[0] + "," + curr[2] + "," + curr[3] + "\n";
       });
 
-      console.log(csv);
       element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(csv));
-      element.setAttribute('download', "openTrackerData.csv");
+      element.setAttribute('download', "OpenTrakerData.csv");
       element.style.display = 'none';
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
     }
-
-
-
-
   </script>
-
 </body>
 
 </html>
