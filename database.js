@@ -1,29 +1,29 @@
-const sqlite3 = require("sqlite3").verbose();
-const { open } = require("sqlite");
+// const sqlite3 = require("sqlite3").verbose();
+// const { open } = require("sqlite");
 const path = require("path");
+const dotenv = require('dotenv');
+const sequelize = require("./model/db");
+const Location = require("./model/location.model");
+dotenv.config();
 
-/**Create tracker.db */
-const db_name = path.join(__dirname, "data", "tracker.db");
-const dbPromise = open({
-  filename: db_name,
-  driver: sqlite3.Database,
-});
+// /**Create tracker.db */
+// const db_name = path.join(__dirname, "data", "tracker.db");
+// const dbPromise = open({
+//   filename: db_name,
+//   driver: sqlite3.Database,
+// });
+
 
 /**
  * Setup the required tables
  */
 Build = async () => {
-  console.log("DB Filename: ", db_name);
-  const db = await dbPromise;
 
-  const LocationsQuery =
-    "CREATE TABLE IF NOT EXISTS Locations (ID INTEGER PRIMARY KEY AUTOINCREMENT, DeviceID INTEGER NOT NULL, Latitude REAL NOT NULL, Longitude REAL NOT NULL, Time DATETIME NOT NULL)";
+  console.log('Making a connection...')
+  const res = await Location.sync({ force: false });
 
-  const DeviceURLQuery =
-    "CREATE TABLE IF NOT EXISTS DeviceURL ( DeviceID INTEGER NOT NULL PRIMARY KEY, URL VARCHAR(2048) NULL)";
+  console.log("Syncing done ")
 
-  await db.exec(LocationsQuery);
-  await db.exec(DeviceURLQuery);
 };
 
 /**
@@ -31,21 +31,24 @@ Build = async () => {
  * @param {json} deviceData { DeviceID: value }
  */
 GetDeviceData = async (deviceData) => {
-  const db = await dbPromise;
-  console.log(
-    "Query: ",
-    `SELECT * FROM Locations where DeviceID = ${deviceData.DeviceID}`
-  );
-  var dataset = [];
-  const results = await db.all(
-    "SELECT * FROM Locations where DeviceID = ?",
-    deviceData.DeviceID
-  );
-  for (each of results) {
-    dataset.push([each.Time, each.DeviceID, each.Latitude, each.Longitude]);
-  }
+  try {
+    const result = await Location.findAll({
+      where: {
+        DeviceID: deviceData.DeviceID
+      },
+      attributes: ['DeviceID', 'Latitude', 'Longitude', 'Time']
+    });
+    const dataset = [];
 
-  return dataset;
+    for (each of result) {
+      dataset.push([each.Time, each.DeviceID, each.Latitude, each.Longitude])
+    }
+
+    return dataset;
+  } catch (error) {
+    console.log(`DB Error: Cannot fetch device data for::: ${deviceData.DeviceID}`);
+    return [];
+  }
 };
 
 /**
@@ -70,23 +73,19 @@ GetDeviceIDByDeviceUrl = async (userurl) => {
  * @param {json} deviceData {DeviceID: , Latitude: , Longitude: , Time: ''}
  */
 AddDeviceData = async (deviceData) => {
-  const db = await dbPromise;
-  console.log(
-    "INSERT INTO Locations(DeviceID, Latitude, Longitude, Time) VALUES (?, ?, ?, ?)",
-    deviceData.DeviceID,
-    deviceData.Latitude,
-    deviceData.Longitude,
-    deviceData.Time
-  );
-  await db.run(
-    "INSERT INTO Locations(DeviceID, Latitude, Longitude, Time) VALUES (?, ?, ?, ?)",
-    [
-      deviceData.DeviceID,
-      deviceData.Latitude,
-      deviceData.Longitude,
-      deviceData.Time,
-    ]
-  );
+  const {DeviceID, Latitude, Longitude, Time} = deviceData;
+
+  try {
+    const result = await Location.create({
+      DeviceID,
+      Latitude,
+      Longitude,
+      Time
+    });
+    return result;
+  } catch (error) {
+    console.error(`Error during insertion::: ${JSON.stringify(deviceData, null, 2)}`)
+  }
 };
 
 /**
