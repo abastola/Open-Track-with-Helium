@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>OpenTrack with Helium</title>
+  <title>OpenTrak with Helium</title>
 
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <!-- Font Awesome -->
@@ -38,61 +38,7 @@
 
   <script src="/javascripts/leaflet-ant-path.js"> </script>
 
-  <link rel="stylesheet" href="/stylesheets/admin.css" />
-
-
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-
-    .b-example-divider {
-      height: 3rem;
-      background-color: rgba(0, 0, 0, .1);
-      border: solid rgba(0, 0, 0, .15);
-      border-width: 1px 0;
-      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
-
-    .b-example-vr {
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 100vh;
-    }
-
-    .bi {
-      vertical-align: -.125em;
-      fill: currentColor;
-    }
-
-    .nav-scroller {
-      position: relative;
-      z-index: 2;
-      height: 2.75rem;
-      overflow-y: hidden;
-    }
-
-    .nav-scroller .nav {
-      display: flex;
-      flex-wrap: nowrap;
-      padding-bottom: 1rem;
-      margin-top: -1px;
-      overflow-x: auto;
-      text-align: center;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
-  </style>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 
 <body>
@@ -104,21 +50,15 @@
       class="collapse d-lg-block sidebar collapse bg-dark topHeader m-3 customCardComponent contentBelowTopBar">
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4">
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span>
-          </a>
           <a href="https://www.iotoffgrid.com/" class="list-group-item list-group-item-action py-2 ripple active">
-            <i class="fas fa-chart-area fa-fw me-3"></i><span>Iot Off-Grid</span>
+            <i class="fas fa-external-link-alt me-3"></i><span>Iot Off-Grid</span>
           </a>
           <a href="https://www.helium.com/" class="list-group-item list-group-item-action py-2 ripple"><i
-              class="fas fa-lock fa-fw me-3"></i><span>Helium</span></a>
+              class="fas fa-external-link-alt me-3"></i><span>Helium</span></a>
           <a href="http://www.helium.foundation/" class="list-group-item list-group-item-action py-2 ripple"><i
-              class="fas fa-chart-line fa-fw me-3"></i><span>Helium Foundation</span></a>
-          <a href="https://dewi.org/" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-chart-pie fa-fw me-3"></i><span>DeWi</span>
-          </a>
+              class="fas fa-external-link-alt me-3"></i><span>Helium Foundation</span></a>
           <a href="https://rakwireless.kckb.st/50a28dfa" class="list-group-item list-group-item-action py-2 ripple"><i
-              class="fas fa-chart-bar fa-fw me-3"></i><span>Buy WisNode TrackIt</span></a>
+              class="fas fa-external-link-alt me-3"></i><span>Buy WisNode TrackIt</span></a>
         </div>
       </div>
       <div class="QRCodeDiv">
@@ -135,18 +75,19 @@
     <!-- Sidebar -->
 
     <!-- Navbar -->
-    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top topHeader topNavBar">
+    <nav id="main-navbar" class="navbar navbar-expand-lg fixed-top topHeader topNavBar">
       <!-- Container wrapper -->
-      <div class="container-fluid justify-content-center">
+      <div class="container-fluid justify-content-center topDivContent">
         <!-- Toggle button -->
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
-          aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navBarExpandBtn" type="button" data-mdb-toggle="collapse"
+          data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+          aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
         </button>
 
         <!-- Brand -->
-        <a class="navbar-brand" href="/">
-          OpenTrack with Helium
+        <a class="navbar-brand headerText" href="/">
+          OpenTrak with Helium
         </a>
       </div>
       <!-- Container wrapper -->
@@ -196,8 +137,8 @@
               <div class="w-100 card-img-top" id="map" width="900" height="380"></div>
             </div>
             <div class="card-body">
-              <strong>OpenTrack is built by <a href="https://www.iotoffgrid.com/">IoT Off-Grid</a> with support from <a
-                  href="https://www.helium.foundation/">Helium Foundation</a> | Improve OpenTrack on <a
+              <strong>OpenTrak is built by <a href="https://www.iotoffgrid.com/">IoT Off-Grid</a> with support from <a
+                  href="https://www.helium.foundation/">Helium Foundation</a> | Improve OpenTrak on <a
                   href="https://github.com/abastol1/tracker">Github</a></strong>
               <i class="fas fa-cloud-download"></i>
 
@@ -213,7 +154,7 @@
   <!-- MDB -->
   <script type="text/javascript" src="/javascripts/mdb.min.js"></script>
   <!-- Custom scripts -->
-  <script type="text/javascript" src="/javascripts/admin.js"></script>
+  <script type="text/javascript" src="/javascripts/script.js"></script>
 
   <script type="text/javascript">
     var locations = '<%- JSON.stringify(Response.locations) %>';
