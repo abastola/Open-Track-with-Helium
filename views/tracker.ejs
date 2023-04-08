@@ -32,6 +32,8 @@
     integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
     crossorigin=""></script>
 
+  <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+
   <script src="/javascripts/qrcode.min.js"></script>
 
   <script src="/javascripts/leaflet-ant-path.js"> </script>
@@ -98,7 +100,8 @@
   <!--Main Navigation-->
   <header>
     <!-- Sidebar -->
-    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-dark topHeader">
+    <nav id="sidebarMenu"
+      class="collapse d-lg-block sidebar collapse bg-dark topHeader m-3 customCardComponent contentBelowTopBar">
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4">
           <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
@@ -116,18 +119,25 @@
           </a>
           <a href="https://rakwireless.kckb.st/50a28dfa" class="list-group-item list-group-item-action py-2 ripple"><i
               class="fas fa-chart-bar fa-fw me-3"></i><span>Buy WisNode TrackIt</span></a>
-          <div id="qrcode">
-          </div>
-
         </div>
       </div>
+      <div class="QRCodeDiv">
+        <div id="qrcode">
+        </div>
+        <div>
+          <button type="button" class="btn btn-light btn-rounded" onclick=" DownloadQRCode();"><i
+              title="Download QR Code" class="fas fa-cloud-download-alt"></i>
+            Download QR Code</button>
+        </div>
+      </div>
+
     </nav>
     <!-- Sidebar -->
 
     <!-- Navbar -->
-    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top topHeader">
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top topHeader topNavBar">
       <!-- Container wrapper -->
-      <div class="container-fluid">
+      <div class="container-fluid justify-content-center">
         <!-- Toggle button -->
         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
           aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -146,10 +156,10 @@
   <!--Main Navigation-->
 
   <!--Main layout-->
-  <main style="margin-top: 58px">
-    <div class="card m-4 mainCard">
-      <div class="container-fluid pt-4">
-        <div class="btn-toolbar mb-2 mb-md-0">
+  <main class="m-3">
+    <div class="card customCardComponent contentBelowTopBar ms-3 mapComponent">
+      <div class="container-fluid btnOnMap">
+        <div class="btn-toolbar mb-2 mb-md-0 pt-2 d-flex justify-content-end">
           <button type="button" class="btn btn-dark m-1" onclick="copyURLToClipboard()">Share</button>
           <button type="button" class="btn btn-dark m-1" onclick="exportToExcel();">Export</button>
           <div class="dropdown">
@@ -178,9 +188,9 @@
         </div>
       </div>
 
-      <div class="container-fluid pt-4">
+      <div class="container-fluid p-0">
         <!-- Section: Main chart -->
-        <section class="mb-4">
+        <section class="mb-2">
           <div class="">
             <div class="card-header p-0">
               <div class="w-100 card-img-top" id="map" width="900" height="380"></div>
@@ -189,6 +199,8 @@
               <strong>OpenTrack is built by <a href="https://www.iotoffgrid.com/">IoT Off-Grid</a> with support from <a
                   href="https://www.helium.foundation/">Helium Foundation</a> | Improve OpenTrack on <a
                   href="https://github.com/abastol1/tracker">Github</a></strong>
+              <i class="fas fa-cloud-download"></i>
+
             </div>
           </div>
         </section>
@@ -204,14 +216,6 @@
   <script type="text/javascript" src="/javascripts/admin.js"></script>
 
   <script type="text/javascript">
-    new QRCode(document.getElementById("qrcode"), {
-      text: window.location.href,
-      width: 128,
-      height: 128,
-      colorDark: "#000000",
-      colorLight: "#ffffff",
-      correctLevel: QRCode.CorrectLevel.H
-    });
     var locations = '<%- JSON.stringify(Response.locations) %>';
     locations = JSON.parse(locations);
 
