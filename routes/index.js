@@ -1,6 +1,7 @@
 var express = require("express");
 var database = require("../database");
 var router = express.Router();
+var createError = require("http-errors");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -13,20 +14,26 @@ router.get("/", function (req, res, next) {
  */
 router.get("/tracker/:deviceId", async function (req, res, next) {
   try {
-    if (!req.params || !req.params.deviceId) {
-      return res.send(
-        "Device EUI was not passed. Please check your URL and try again."
-      );
+    if (!req?.params?.deviceId) {
+      throw new createError.BadRequest("Please check your URL.");
     }
-    var deviceId = req.params.deviceId;
+
+    const deviceId = req.params.deviceId;
     // Get list of locations using the deviceid.
-    var responseData = {
+    const responseData = {
       locations: await database.GetDeviceData({ DeviceID: deviceId }),
     };
 
-    res.render("tracker", { Response: responseData, DeviceEUI: deviceId });
-  } catch {
-    res.sendStatus(400);
+    if (responseData?.locations?.length) {
+      return res.render("tracker", {
+        Response: responseData,
+        DeviceEUI: deviceId,
+      });
+    } else {
+      throw new createError.NotFound("Device not found");
+    }
+  } catch (e) {
+    next(e);
   }
 });
 
