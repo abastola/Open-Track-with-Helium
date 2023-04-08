@@ -124,5 +124,6 @@ a:hover{
   color: rgb(225, 200, 73);
 }
 
-
-
+.bodyImage {
+  max-width: -webkit-fill-available;
+}
