@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Hugo 0.101.0" />
+    <title>OpenTrak with Helium</title>
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.2/examples/cover/"
+    />
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <script src="/javascripts/bootstrap.bundle.min.js"></script>
+    <meta name="theme-color" content="#712cf9" />
+    <style>
+      html,
+      body {
+        height: 100vh;
+        background-color: #8ec5fc;
+        background-image: url("/images/bg.PNG");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      html:before,
+      html:after,
+      body:before,
+      body:after {
+        content: "";
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      html:before,
+      html:after,
+      html {
+        overflow: hidden;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-family: "Varela Round", Sans-serif;
+        text-shadow: 0px 30px rgba(0, 0, 0, 0.15);
+      }
+      .main {
+        text-align: center;
+        z-index: 5;
+      }
+
+      p {
+        font-size: 18px;
+        margin-top: 0;
+      }
+
+      h1 {
+        font-size: 95px;
+        margin: 0;
+      }
+
+      button {
+        padding: 0 12px;
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 30px 15px rgba(#000, 0.15);
+        outline: none;
+        background-color: white;
+        color: black;
+        font: 400 16px/2.5 Nunito, "Varela Round", Sans-serif;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h1><%= err.status %></h1>
+      <p><%= err.message %></p>
+      <p class="lead">
+        <a
+          href="/"
+          class="btn btn-lg btn-secondary fw-bold border-white bg-white text-dark"
+          >Go Home</a
+        >
+      </p>
+    </div>
+  </body>
+</html>
