@@ -15,7 +15,7 @@ router.get("/tracker/:deviceId", async function (req, res, next) {
   try {
     if (!req.params || !req.params.deviceId) {
       return res.send(
-        "Device ID is not passed. Please check your URL and try again."
+        "Device EUI was not passed. Please check your URL and try again."
       );
     }
     var deviceId = req.params.deviceId;
@@ -24,7 +24,7 @@ router.get("/tracker/:deviceId", async function (req, res, next) {
       locations: await database.GetDeviceData({ DeviceID: deviceId }),
     };
 
-    res.render("tracker", { Response: responseData });
+    res.render("tracker", { Response: responseData, DeviceEUI: deviceId });
   } catch {
     res.sendStatus(400);
   }
