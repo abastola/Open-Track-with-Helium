@@ -57,3 +57,7 @@ body {
 .topHeader {
   z-index: 10000;
 }
+
+#qrcode{
+  text-align: -webkit-center;
+}
