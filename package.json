@@ -10,6 +10,7 @@
     "@grapecity/spread-sheets": "^15.1.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
     "ejs": "~3.1.7",
     "express": "~4.18.2",
     "http-errors": "~1.6.3",
@@ -17,6 +18,9 @@
     "jquery": "^3.6.0",
     "morgan": "~1.9.1",
     "npm": "^8.17.0",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.30.0",
     "sqlite": "^4.1.2",
     "sqlite3": "^5.0.11"
   }

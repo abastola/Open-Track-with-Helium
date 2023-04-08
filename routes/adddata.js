@@ -9,6 +9,11 @@ var router = express.Router();
  * Adds the decoded info into the database
  */
 router.post("/", function (req, res, next) {
+  const {dev_eui = ''} = req.body;
+
+  if (!dev_eui){
+    return res.status(400).send('No DEV EUI in request payload');
+  }
   try {
     var payload = req.body.payload;
     if (req.body.port !== 2) {
@@ -21,11 +26,12 @@ router.post("/", function (req, res, next) {
 
       if (locationInfo && "dev_id" in locationInfo && "lat" in locationInfo && "lng" in locationInfo) {
         var locationToPush = {
-          DeviceID: locationInfo.dev_id,
+          DeviceID: dev_eui,
           Latitude: locationInfo.lat,
           Longitude: locationInfo.lng,
           Time: new Date(Date.now()).toISOString()
         };
+        console.log("Adding this data ", locationToPush)
         database.AddDeviceData(locationToPush);
         res.sendStatus(200);
       }
